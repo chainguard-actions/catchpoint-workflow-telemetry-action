@@ -1,0 +1,7 @@
+{
+  "owner": "catchpoint",
+  "name": "workflow-telemetry-action",
+  "visibility": "internal",
+  "description": "Workflow Telemetry",
+  "block_publish": false
+}
