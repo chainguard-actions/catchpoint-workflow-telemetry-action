@@ -8,6 +8,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
+| v1.8.4 | [`v1.8.4`](https://github.com/chainguard-actions/workflow-telemetry-action/tree/v1.8.4) | — |
 | v1.8.5 | [`v1.8.5`](https://github.com/chainguard-actions/workflow-telemetry-action/tree/v1.8.5) | — |
 | v1.8.6 | [`v1.8.6`](https://github.com/chainguard-actions/workflow-telemetry-action/tree/v1.8.6) | — |
 | v1.8.7 | [`v1.8.7`](https://github.com/chainguard-actions/workflow-telemetry-action/tree/v1.8.7) | — |
