@@ -1,0 +1,7 @@
+{
+  "ran": true,
+  "passed": true,
+  "output": "\n\u003e workflow-telemetry-action@2.0.0 test\n\u003e echo \"Warn: no test specified\" \u0026\u0026 exit 0\n\nWarn: no test specified\n",
+  "duration_ms": 155,
+  "exit_code": 0
+}
