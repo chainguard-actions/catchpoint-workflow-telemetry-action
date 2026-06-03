@@ -12,7 +12,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 | v1.8.5 | [`v1.8.5`](https://github.com/chainguard-actions/catchpoint-workflow-telemetry-action/tree/v1.8.5) | — |
 | v1.8.6 | [`v1.8.6`](https://github.com/chainguard-actions/catchpoint-workflow-telemetry-action/tree/v1.8.6) | — |
 | v1.8.7 | [`v1.8.7`](https://github.com/chainguard-actions/catchpoint-workflow-telemetry-action/tree/v1.8.7) | — |
-| v2.0.0 | [`v2.0.0`](https://github.com/chainguard-actions/catchpoint-workflow-telemetry-action/tree/v2.0.0) | — |
+| v2.0.0 | [`v2.0.0`](https://github.com/chainguard-actions/catchpoint-workflow-telemetry-action/tree/v2.0.0) | [`94c3c3d`](https://github.com/catchpoint/workflow-telemetry-action/commit/94c3c3d9567a0205de6da68a76c428ce4e769af1) |
 
 ## Privacy
 
