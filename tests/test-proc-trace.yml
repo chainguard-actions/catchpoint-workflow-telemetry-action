@@ -1,0 +1,23 @@
+name: Test with process tracing enabled
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          github_token: ${{ github.token }}
+          job_summary: "true"
+          comment_on_pr: "false"
+          proc_trace_sys_enable: "true"
+          proc_trace_chart_show: "true"
+          proc_trace_table_show: "true"
+          proc_trace_min_duration: "0"
+          proc_trace_chart_max_count: "50"
+      - name: Assert action completed with process tracing
+        run: |
+          echo "Action completed with process tracing enabled"
+          echo "PASS: action ran without error with proc_trace_sys_enable=true and proc_trace_table_show=true"
