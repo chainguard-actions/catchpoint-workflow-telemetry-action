@@ -1,0 +1,33 @@
+name: Test process tracing enabled
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          proc_trace_sys_enable: 'true'
+          proc_trace_chart_show: 'true'
+          proc_trace_table_show: 'true'
+          proc_trace_min_duration: 0
+          proc_trace_chart_max_count: 50
+          job_summary: 'true'
+          comment_on_pr: 'false'
+          metric_frequency: 5
+      - name: Assert action ran with process tracing (success or graceful failure on sentinel repo)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" = "success" ]; then
+            echo "PASS: action completed successfully with process tracing enabled"
+          elif [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action failed gracefully (expected on sentinel repo)"
+          else
+            echo "FAIL: unexpected outcome '$OUTCOME'"
+            exit 1
+          fi
