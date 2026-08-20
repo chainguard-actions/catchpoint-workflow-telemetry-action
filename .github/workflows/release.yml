@@ -1,0 +1,87 @@
+name: release-workflow-telemetry
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_scale:
+        type: choice
+        description: Version Scale
+        default: patch
+        options:
+          - patch
+          - minor
+          - major
+
+permissions:
+  contents: read
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@a37ce9120846195fa4ece8f58b268e6043cb2f26 # v3
+        with:
+          token: ${{ secrets.FORESIGHT_GITHUB_TOKEN }}
+      - name: Configure Git User
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@3235b876344d2a9aa001b8d1453c930bba69e610 # v3
+        with:
+          node-version: "16.x"
+          registry-url: https://registry.npmjs.org
+      - name: Bump npm version
+        env:
+          VERSION_SCALE: ${{ github.event.inputs.version_scale }}
+        run: npm version "$VERSION_SCALE"
+      - run: |
+          git add .
+          git diff-index --quiet HEAD || git commit -m 'Increase package.json version [skip ci]'
+          git push origin HEAD
+
+  create-release:
+    runs-on: ubuntu-latest
+    needs: [update-version]
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@a37ce9120846195fa4ece8f58b268e6043cb2f26 # v3
+        with:
+          # ref is required
+          # see:
+          #   - https://github.com/actions/checkout/issues/439
+          #   - https://github.com/actions/checkout/issues/461
+          ref: ${{ github.ref }}
+      - name: Set new package version
+        id: package-version
+        run: |
+          export PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          echo $PACKAGE_VERSION
+          if [[ -z $PACKAGE_VERSION ]]
+          then
+            echo "Couldn't get variable PACKAGE_VERSION."
+            exit 1
+          fi
+
+          echo "PACKAGE_VERSION=$PACKAGE_VERSION" >> $GITHUB_ENV
+      - name: Create a GitHub release
+        uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 # v6
+        with:
+          github-token: ${{ secrets.FORESIGHT_GITHUB_TOKEN }}
+          script: |
+            try {
+              const response = await github.rest.repos.createRelease({
+                draft: false,
+                generate_release_notes: true,
+                name: `v${{ env.PACKAGE_VERSION }}`,
+                owner: context.repo.owner,
+                prerelease: false,
+                repo: context.repo.repo,
+                tag_name: `v${{ env.PACKAGE_VERSION }}`
+              });
+            } catch (error) {
+              core.setFailed(error.message);
+            }
