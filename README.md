@@ -8,7 +8,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
-| v1.8.4 | [`v1.8.4`](https://github.com/chainguard-actions/catchpoint-workflow-telemetry-action/tree/v1.8.4) | — |
+| v1.8.4 | [`v1.8.4`](https://github.com/chainguard-actions/catchpoint-workflow-telemetry-action/tree/v1.8.4) | [`43fbaca`](https://github.com/catchpoint/workflow-telemetry-action/commit/43fbaca16d2bf3f18b4405a0c12d3e8650f9ed12) |
 | v1.8.5 | [`v1.8.5`](https://github.com/chainguard-actions/catchpoint-workflow-telemetry-action/tree/v1.8.5) | — |
 | v1.8.6 | [`v1.8.6`](https://github.com/chainguard-actions/catchpoint-workflow-telemetry-action/tree/v1.8.6) | — |
 | v1.8.7 | [`v1.8.7`](https://github.com/chainguard-actions/catchpoint-workflow-telemetry-action/tree/v1.8.7) | — |
